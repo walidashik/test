@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final restaurants = restaurantsFromJson(jsonString);
-
 import 'dart:convert';
 
 Restaurants restaurantsFromJson(String str) => Restaurants.fromJson(json.decode(str));
@@ -391,7 +387,7 @@ class DeliveryArea {
     radius: json["radius"],
     postalId: json["postal_id"],
     minOrder: json["min_order"],
-    deliveryPrice: json["delivery_price"] == null ? 0.0 : json["delivery_price"].toDouble(),
+    deliveryPrice: json["delivery_price"] == 0.0 ? null : json["delivery_price"].toDouble(),
     deliveryTime: json["delivery_time"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -408,7 +404,7 @@ class DeliveryArea {
     "delivery_price": deliveryPrice,
     "delivery_time": deliveryTime,
     "created_at": createdAt == null ? DateTime.now() : createdAt?.toIso8601String(),
-    "updated_at": updatedAt == null ? DateTime.now()  : updatedAt?.toIso8601String(),
+    "updated_at": updatedAt == null ?  DateTime.now() : updatedAt?.toIso8601String(),
   };
 }
 
@@ -440,7 +436,6 @@ class FormattedOpeningHours {
     openFrom: json["open_from"],
     formattedOpeningHoursClass: json["class"],
   );
-
 }
 
 class ForWeek {
