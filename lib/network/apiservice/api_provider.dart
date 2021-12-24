@@ -14,7 +14,7 @@ class ApiProvider {
     String? order,
     String? filter,
   }) async {
-    try {
+    // try {
       final response = await restaurantProvider.getRestaurants(
         placeId: placeId,
         order: order,
@@ -37,13 +37,14 @@ class ApiProvider {
         );
         return restaurants;
       }
-    } catch (e) {
-      final restaurants = Restaurants(
-        restaurants: [],
-        tags: [],
-        pagination: null,
-      );
-      return restaurants;
-    }
+    // } catch (e) {
+    //   print('error: ${e.toString()}');
+    //   final restaurants = Restaurants(
+    //     restaurants: [],
+    //     tags: [],
+    //     pagination: null,
+    //   );
+    //   return restaurants;
+    // }
   }
 }

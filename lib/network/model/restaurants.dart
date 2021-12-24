@@ -13,7 +13,7 @@ class Restaurants {
   List<Tag>? tags;
   Pagination? pagination;
 
-  factory Restaurants.fromJson(Map<String, dynamic> json) => Restaurants(
+  factory Restaurants.fromJson(Map<String?, dynamic> json) => Restaurants(
     restaurants: json["restaurants"] == null ? null : List<Restaurant>.from(json["restaurants"].map((x) => Restaurant.fromJson(x))),
     tags: json["tags"] == null ? null : List<Tag>.from(json["tags"].map((x) => Tag.fromJson(x))),
     pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
@@ -34,18 +34,18 @@ class Pagination {
     required this.morePage,
   });
 
-  int total;
-  int count;
-  int perPage;
-  int currentPage;
-  int totalPages;
-  int prev;
-  int next;
-  int first;
-  int last;
+  int? total;
+  int? count;
+  int? perPage;
+  int? currentPage;
+  int? totalPages;
+  int? prev;
+  int? next;
+  int? first;
+  int? last;
   bool morePage;
 
-  factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
+  factory Pagination.fromJson(Map<String?, dynamic> json) => Pagination(
     total: json["total"],
     count: json["count"],
     perPage: json["per_page"],
@@ -58,7 +58,7 @@ class Pagination {
     morePage: json["more_page"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String?, dynamic> toJson() => {
     "total": total,
     "count": count,
     "per_page": perPage,
@@ -105,37 +105,37 @@ class Restaurant {
     required this.categories,
   });
 
-  int id;
-  String name;
-  String slug;
-  String logo;
-  int pickup;
-  int delivery;
-  String details;
-  String description;
-  String managerName;
-  String managerGender;
-  int managerTelefon;
-  int telefon;
-  String email;
-  String formattedAddress;
-  String street;
-  String streetNumber;
-  String lat;
-  String lng;
-  String city;
-  String addressId;
-  int postalCode;
-  int isAvailable;
-  int isTest;
+  int? id;
+  String? name;
+  String? slug;
+  String? logo;
+  int? pickup;
+  int? delivery;
+  String? details;
+  String? description;
+  String? managerName;
+  String? managerGender;
+  int? managerTelefon;
+  int? telefon;
+  String? email;
+  String? formattedAddress;
+  String? street;
+  String? streetNumber;
+  String? lat;
+  String? lng;
+  String? city;
+  String? addressId;
+  int? postalCode;
+  int? isAvailable;
+  int? isTest;
   double distance;
   bool isDelivered;
   DeliveryArea? deliveryArea;
   FormattedOpeningHours? formattedOpeningHours;
-  String tags;
+  String? tags;
   List<Category>? categories;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
+  factory Restaurant.fromJson(Map<String?, dynamic> json) => Restaurant(
     id: json["id"],
     name: json["name"],
     slug: json["slug"],
@@ -187,23 +187,23 @@ class Category {
     required this.foods,
   });
 
-  int id;
-  int parentId;
-  int restId;
-  String code;
-  String name;
-  String slug;
-  String description;
-  String details;
-  String metaTitle;
-  String metaDescription;
+  int? id;
+  int? parentId;
+  int? restId;
+  String? code;
+  String? name;
+  String? slug;
+  String? description;
+  String? details;
+  String? metaTitle;
+  String? metaDescription;
   dynamic googleProductCategoryId;
-  int sortOrder;
+  int? sortOrder;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<Food>? foods;
 
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
+  factory Category.fromJson(Map<String?, dynamic> json) => Category(
     id: json["id"],
     parentId: json["parent_id"],
     restId: json["rest_id"],
@@ -241,23 +241,23 @@ class Food {
     required this.priceFull,
   });
 
-  int id;
-  int sortOrder;
-  int restId;
-  int categoryId;
-  String name;
-  String descripton;
-  String details;
+  int? id;
+  int? sortOrder;
+  int? restId;
+  int? categoryId;
+  String? name;
+  String? descripton;
+  String? details;
   List<Price>? price;
-  int isEnabled;
-  int isSpecial;
-  String foodNumber;
-  int minOrder;
+  int? isEnabled;
+  int? isSpecial;
+  String? foodNumber;
+  int? minOrder;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<Price>? priceFull;
 
-  factory Food.fromJson(Map<String, dynamic> json) => Food(
+  factory Food.fromJson(Map<String?, dynamic> json) => Food(
     id: json["id"],
     sortOrder: json["sort_order"],
     restId: json["rest_id"],
@@ -285,13 +285,13 @@ class Price {
     required this.id,
   });
 
-  String name;
-  int price;
-  String isExtra;
+  String? name;
+  int? price;
+  String? isExtra;
   List<Extra>? extras;
-  String id;
+  String? id;
 
-  factory Price.fromJson(Map<String, dynamic> json) => Price(
+  factory Price.fromJson(Map<String?, dynamic> json) => Price(
     name: json["name"],
     price: json["price"],
     isExtra: json["is_extra"],
@@ -311,15 +311,15 @@ class Extra {
     required this.id,
   });
 
-  String name;
-  String type;
-  String required;
-  int minSelect;
-  int maxSelect;
+  String? name;
+  String? type;
+  String? required;
+  int? minSelect;
+  int? maxSelect;
   List<Item>? items;
-  String id;
+  String? id;
 
-  factory Extra.fromJson(Map<String, dynamic> json) => Extra(
+  factory Extra.fromJson(Map<String?, dynamic> json) => Extra(
     name: json["name"],
     type: json["type"],
     required: json["required"],
@@ -338,12 +338,12 @@ class Item {
     required this.name,
   });
 
-  String extraName;
-  int price;
-  String id;
-  String name;
+  String? extraName;
+  int? price;
+  String? id;
+  String? name;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory Item.fromJson(Map<String?, dynamic> json) => Item(
     extraName: json["extra_name"],
     price: json["price"],
     id: json["id"],
@@ -367,19 +367,19 @@ class DeliveryArea {
     required this.updatedAt,
   });
 
-  int id;
-  int restId;
-  String type;
-  String postalCode;
+  int? id;
+  int? restId;
+  String? type;
+  String? postalCode;
   dynamic radius;
-  String postalId;
-  int minOrder;
+  String? postalId;
+  int? minOrder;
   double deliveryPrice;
-  int deliveryTime;
+  int? deliveryTime;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory DeliveryArea.fromJson(Map<String, dynamic> json) => DeliveryArea(
+  factory DeliveryArea.fromJson(Map<String?, dynamic> json) => DeliveryArea(
     id: json["id"],
     restId: json["rest_id"],
     type: json["type"],
@@ -393,7 +393,7 @@ class DeliveryArea {
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String?, dynamic> toJson() => {
     "id": id,
     "rest_id": restId,
     "type": type,
@@ -421,13 +421,13 @@ class FormattedOpeningHours {
 
   List<ForWeek>? forWeek;
   bool isOpen;
-  String isOpenString;
-  String nextOpen;
-  String nextClose;
-  String openFrom;
-  String formattedOpeningHoursClass;
+  String? isOpenString;
+  String? nextOpen;
+  String? nextClose;
+  String? openFrom;
+  String? formattedOpeningHoursClass;
 
-  factory FormattedOpeningHours.fromJson(Map<String, dynamic> json) => FormattedOpeningHours(
+  factory FormattedOpeningHours.fromJson(Map<String?, dynamic> json) => FormattedOpeningHours(
     forWeek: json["forWeek"] == null ? null : List<ForWeek>.from(json["forWeek"].map((x) => ForWeek.fromJson(x))),
     isOpen: json["isOpen"],
     isOpenString: json["isOpenString"],
@@ -445,11 +445,11 @@ class ForWeek {
     required this.timings,
   });
 
-  String day;
-  int isOpen;
+  String? day;
+  int? isOpen;
   List<Timing>? timings;
 
-  factory ForWeek.fromJson(Map<String, dynamic> json) => ForWeek(
+  factory ForWeek.fromJson(Map<String?, dynamic> json) => ForWeek(
     day: json["day"],
     isOpen: json["is_open"],
     timings: json["timings"] == null ? null : List<Timing>.from(json["timings"].map((x) => Timing.fromJson(x))),
@@ -464,19 +464,19 @@ class Timing {
     required this.endDateTime,
   });
 
-  String start;
-  String end;
-  String startDateTime;
-  String endDateTime;
+  String? start;
+  String? end;
+  String? startDateTime;
+  String? endDateTime;
 
-  factory Timing.fromJson(Map<String, dynamic> json) => Timing(
+  factory Timing.fromJson(Map<String?, dynamic> json) => Timing(
     start: json["start"],
     end: json["end"],
     startDateTime: json["start_date_time"],
     endDateTime: json["end_date_time"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String?, dynamic> toJson() => {
     "start": start,
     "end": end,
     "start_date_time": startDateTime,
@@ -490,15 +490,15 @@ class Tag {
     required this.id,
   });
 
-  String name;
-  int id;
+  String? name;
+  int? id;
 
-  factory Tag.fromJson(Map<String, dynamic> json) => Tag(
+  factory Tag.fromJson(Map<String?, dynamic> json) => Tag(
     name: json["name"],
     id: json["id"],
   );
 
-  Map<String, dynamic> toJson() => {
+  Map<String?, dynamic> toJson() => {
     "name": name,
     "id": id,
   };
