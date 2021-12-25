@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:test_project/core/color.dart';
+import 'package:test_project/ui/home/widget/search_view.dart';
 import 'package:test_project/ui/home/widget/tag_page.dart';
 import 'package:test_project/ui/home/widget/user_icon.dart';
 
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late TextEditingController _searchController;
   final _tagLength = 10;
   final _deliveringLocation = 'NEWMARKT 14';
 
@@ -27,6 +29,13 @@ class _HomePageState extends State<HomePage>
       length: _tagLength + 1,
       vsync: this,
     );
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.clear();
+    super.dispose();
   }
 
   @override
@@ -36,7 +45,7 @@ class _HomePageState extends State<HomePage>
         headerSliverBuilder: (context, innerBoxScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 300.0,
+              expandedHeight: 280.0,
               floating: true,
               pinned: true,
               backgroundColor: Colors.white,
@@ -47,10 +56,19 @@ class _HomePageState extends State<HomePage>
                   padding: const EdgeInsets.only(left: 22, right: 22),
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
+                      _buildVerticalSpace(40),
                       _buildHeaderRow(),
+                      _buildVerticalSpace(20),
+                      const Text(
+                        'Yummy Food?',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      _buildVerticalSpace(20),
+                      SearchView(controller: _searchController),
                     ],
                   ),
                 ),
@@ -61,6 +79,12 @@ class _HomePageState extends State<HomePage>
                     bottom: 16,
                     left: 10,
                     right: 10,
+                  ),
+                  labelStyle: const TextStyle(
+                    color: Color(0XFFA3A3A4),
+                  ),
+                  unselectedLabelStyle: const TextStyle(
+                    color: Colors.black,
                   ),
                   isScrollable: true,
                   controller: _tabController,
@@ -73,6 +97,12 @@ class _HomePageState extends State<HomePage>
           children: _getTabPages(),
         ),
       ),
+    );
+  }
+
+  SizedBox _buildVerticalSpace(double height) {
+    return SizedBox(
+      height: height,
     );
   }
 
@@ -135,8 +165,13 @@ class _HomePageState extends State<HomePage>
               _deliveringLocation.toUpperCase(),
               style: const TextStyle(color: Colors.black),
             ),
-            const SizedBox(width: 12,),
-            const FaIcon(FontAwesomeIcons.chevronDown, size: 14,)
+            const SizedBox(
+              width: 12,
+            ),
+            const FaIcon(
+              FontAwesomeIcons.chevronDown,
+              size: 14,
+            )
           ],
         )
       ],
