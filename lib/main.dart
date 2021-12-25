@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
       title: 'Test Project',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
-        primaryColor: AppColor.primary,
-        errorColor: AppColor.error,
-      ),
+          primarySwatch: Colors.amber,
+          primaryColor: AppColor.primary,
+          errorColor: AppColor.error,
+        ),
       home: const HomePage(),
     );
   }
