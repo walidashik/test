@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:test_project/core/color.dart';
+import 'package:test_project/ui/home/widget/tab_all_page.dart';
 import 'package:test_project/ui/home/widget/search_view.dart';
-import 'package:test_project/ui/home/widget/tag_page.dart';
+import 'package:test_project/ui/home/widget/tab_page.dart';
 import 'package:test_project/ui/home/widget/user_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage>
               expandedHeight: 280.0,
               floating: true,
               pinned: true,
-              backgroundColor: Colors.white,
+              backgroundColor: const Color(0XFFF7F7F7),
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   color: AppColor.primary,
@@ -127,7 +128,7 @@ class _HomePageState extends State<HomePage>
 
   List<Widget> _getTabPages() {
     final tabs = <Widget>[];
-    tabs.add(const Text('All'));
+    tabs.add(const TabAllPage());
     for (var i = 1; i <= _tagLength; i++) {
       tabs.add(Text('Tag $i'));
     }
