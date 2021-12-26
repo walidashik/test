@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:test_project/core/color.dart';
+import 'package:test_project/ui/home/widget/app_drawer.dart';
 import 'package:test_project/ui/home/widget/tab_all_page.dart';
 import 'package:test_project/ui/home/widget/search_view.dart';
 import 'package:test_project/ui/home/widget/tab_page.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage>
   late TextEditingController _searchController;
   final _tagLength = 10;
   final _deliveringLocation = 'NEWMARKT 14';
-
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -42,6 +43,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
+      endDrawer: const AppDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxScrolled) {
           return <Widget>[
@@ -50,6 +53,7 @@ class _HomePageState extends State<HomePage>
               floating: true,
               pinned: true,
               backgroundColor: const Color(0XFFF7F7F7),
+              actions: <Widget>[Container()],
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   color: AppColor.primary,
@@ -141,8 +145,11 @@ class _HomePageState extends State<HomePage>
       children: [
         _buildLocationView(),
         const Spacer(),
-        const UserIcon(
-          onTap: null,
+        UserIcon(
+          onTap: () {
+            debugPrint('called');
+            _key.currentState!.openEndDrawer();
+          }
         ),
       ],
     );

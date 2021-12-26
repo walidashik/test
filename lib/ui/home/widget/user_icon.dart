@@ -3,8 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:test_project/core/color.dart';
 
 class UserIcon extends StatelessWidget {
-  const UserIcon({Key? key, this.onTap}) : super(key: key);
+  const UserIcon({Key? key, this.onTap, this.height = 50, this.width = 50})
+      : super(key: key);
   final Function()? onTap;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +19,8 @@ class UserIcon extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25.0),
           child: Container(
-            height: 50,
-            width: 50,
+            height: height,
+            width: width,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0XFF78849E), width: 2),
