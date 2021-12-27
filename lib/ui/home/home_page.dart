@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:test_project/core/color.dart';
+import 'package:test_project/network/model/address.dart';
+import 'package:test_project/ui/home/widget/AddressList.dart';
+import 'package:test_project/ui/home/widget/add_new_address_button.dart';
+import 'package:test_project/ui/home/widget/address_item.dart';
 import 'package:test_project/ui/home/widget/app_drawer.dart';
 import 'package:test_project/ui/home/widget/tab_all_page.dart';
 import 'package:test_project/ui/home/widget/search_view.dart';
@@ -22,6 +26,7 @@ class _HomePageState extends State<HomePage>
   final _tagLength = 10;
   final _deliveringLocation = 'NEWMARKT 14';
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -145,44 +150,105 @@ class _HomePageState extends State<HomePage>
       children: [
         _buildLocationView(),
         const Spacer(),
-        UserIcon(
-          onTap: () {
-            debugPrint('called');
-            _key.currentState!.openEndDrawer();
-          }
-        ),
+        UserIcon(onTap: () {
+          debugPrint('called');
+          _key.currentState!.openEndDrawer();
+        }),
       ],
     );
   }
 
   Widget _buildLocationView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('DELIVERING TO',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-            )),
-        const SizedBox(
-          height: 4,
-        ),
-        Row(
+    return InkWell(
+      onTap: _showAddressPopUp,
+      child: Container(
+        color: AppColor.primary,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              _deliveringLocation.toUpperCase(),
-              style: const TextStyle(color: Colors.black),
-            ),
+            const Text('DELIVERING TO',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                )),
             const SizedBox(
-              width: 12,
+              height: 4,
             ),
-            const FaIcon(
-              FontAwesomeIcons.chevronDown,
-              size: 14,
+            Row(
+              children: [
+                Text(
+                  _deliveringLocation.toUpperCase(),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                const FaIcon(
+                  FontAwesomeIcons.chevronDown,
+                  size: 14,
+                )
+              ],
             )
           ],
-        )
-      ],
+        ),
+      ),
     );
+  }
+
+  void _showAddressPopUp() {
+    final addresses = _getAddresses();
+
+    showModalBottomSheet(
+        context: context,
+        isDismissible: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          ),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        builder: (builder) {
+          return Container(
+            padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0),
+                )),
+            child: Stack(
+              children: [
+                Positioned(
+                  child: AddressList(addresses: addresses),
+                ),
+                Positioned(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AddNewAddressButton(
+                      onTap: () {},
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  List<Address> _getAddresses() {
+    return [
+      const Address(
+        title: 'Home',
+        address: 'Am Home 1-3, 41460 home',
+      ),
+      const Address(
+        title: 'Work',
+        address: 'Am konvent 1-3, 41460 Neuss',
+      ),
+      const Address(
+        title: 'Other',
+        address: 'Am Other 1-3, 41460 other',
+      ),
+    ];
   }
 }
